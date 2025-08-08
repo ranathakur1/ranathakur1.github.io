@@ -22,19 +22,20 @@ body {
 header {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    padding: 1rem 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .logo {
@@ -51,10 +52,9 @@ header {
 
 .nav-menu a {
     text-decoration: none;
-    color: #555;
+    color: #333;
     font-weight: 500;
     transition: color 0.3s ease;
-    padding: 10px 0;
     position: relative;
 }
 
@@ -66,16 +66,103 @@ header {
 .nav-menu a.active::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     left: 0;
-    width: 100%;
+    right: 0;
     height: 2px;
     background-color: #3498db;
 }
 
-/* Hero Section */
+/* Main content offset for fixed header */
+main {
+    margin-top: 80px;
+}
+
+/* Hero Section with Background */
+.hero-with-background {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?w=1920&h=1080&fit=crop&auto=format');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(52, 152, 219, 0.2) 30%,
+        rgba(41, 128, 185, 0.3) 70%,
+        rgba(44, 62, 80, 0.4) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.hero-with-background h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-with-background .hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.about-me-content {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.about-me-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.about-me-content p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #555;
+    line-height: 1.8;
+}
+
+.about-me-content .cta-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Regular Hero Section (for other pages) */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -94,74 +181,7 @@ header {
     margin: 0 auto;
 }
 
-/* Introduction Section */
-.introduction {
-    padding: 80px 0;
-    background-color: #fff;
-}
-
-.introduction h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: #2c3e50;
-}
-
-.intro-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    gap: 50px;
-    align-items: flex-start;
-}
-
-.intro-visual {
-    flex: 0 0 300px;
-}
-
-.ai-images-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    position: relative;
-}
-
-.ai-image {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ai-image:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-}
-
-.ai-image:nth-child(3) {
-    grid-column: 1 / -1;
-    height: 100px;
-    margin-top: 10px;
-}
-
-.intro-text {
-    flex: 1;
-}
-
-.intro-text p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    color: #555;
-    text-align: justify;
-}
-
-.cta-section {
-    text-align: center;
-    margin-top: 40px;
-}
-
+/* CTA Button */
 .cta-button {
     display: inline-block;
     background: linear-gradient(135deg, #3498db, #2980b9);
@@ -200,62 +220,54 @@ header {
 
 .blog-card {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #3498db;
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: center;
+    min-height: 150px;
 }
 
 .blog-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .blog-image {
-    flex-shrink: 0;
-    width: 150px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 8px;
+    flex: 0 0 150px;
+    height: 150px;
 }
 
 .blog-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.blog-card:hover .blog-image img {
-    transform: scale(1.05);
 }
 
 .blog-content {
     flex: 1;
+    padding: 20px 25px;
 }
 
-.blog-card h3 {
+.blog-content h3 {
     font-size: 1.3rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #2c3e50;
+    line-height: 1.4;
 }
 
-.blog-card p {
+.blog-content p {
     color: #666;
-    margin-bottom: 20px;
-    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .blog-link {
     color: #3498db;
     text-decoration: none;
     font-weight: 600;
-    display: inline-flex;
-    align-items: center;
     transition: color 0.3s ease;
 }
 
@@ -270,67 +282,55 @@ header {
 
 .blog-platforms h2 {
     font-size: 2rem;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     color: #2c3e50;
 }
 
 .platform-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .platform-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
     background: white;
-    padding: 25px;
-    border-radius: 10px;
+    border-radius: 15px;
     text-decoration: none;
-    color: inherit;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    color: #333;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #e74c3c;
+    min-width: 200px;
 }
 
 .platform-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .platform-name {
-    display: block;
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
     color: #2c3e50;
     margin-bottom: 5px;
 }
 
 .platform-desc {
-    color: #666;
     font-size: 0.9rem;
-}
-
-/* Footer */
-footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 30px 0;
-}
-
-footer p {
-    opacity: 0.8;
+    color: #666;
 }
 
 /* Open Source Section */
-.opensource-section {
+.opensource {
     padding: 80px 0;
     background-color: #fff;
 }
 
-.opensource-section h2 {
+.opensource h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
@@ -339,152 +339,144 @@ footer p {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .project-card {
     background: white;
-    border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #3498db;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .project-card h3 {
-    font-size: 1.4rem;
-    color: #2c3e50;
+    font-size: 1.5rem;
     margin-bottom: 15px;
-    font-weight: 700;
+    color: #2c3e50;
 }
 
 .project-card p {
     color: #666;
-    line-height: 1.6;
     margin-bottom: 20px;
-    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .project-link {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
+    color: #3498db;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    transition: color 0.3s ease;
 }
 
 .project-link:hover {
-    background: linear-gradient(135deg, #2980b9, #1f5f8b);
-    transform: translateY(-2px);
+    color: #2980b9;
 }
 
-.contribution-info {
+.contributions-philosophy {
+    text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    text-align: center;
+    padding: 40px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border-left: 4px solid #3498db;
 }
 
-.contribution-info h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
+.contributions-philosophy h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
     color: #2c3e50;
 }
 
-.contribution-content {
-    text-align: left;
+.contributions-philosophy p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
 }
 
-.contribution-content p {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
-        height: auto;
-        padding: 15px 20px;
-    }
-    
-    .nav-menu {
-        margin-top: 15px;
         gap: 20px;
     }
     
-    .hero h1 {
+    .nav-menu {
+        gap: 20px;
+    }
+    
+    .hero-with-background h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-with-background .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .about-me-content {
+        padding: 30px 20px;
+        margin-top: 30px;
+    }
+    
+    .about-me-content h2 {
         font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .intro-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    
-    .intro-visual {
-        flex: none;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .ai-images-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .ai-image:nth-child(3) {
-        grid-column: 1;
-        height: 120px;
-        margin-top: 0;
     }
     
     .blog-grid {
         grid-template-columns: 1fr;
     }
     
-    .platform-links {
+    .blog-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .blog-image {
+        flex: none;
+        width: 100%;
+        height: 200px;
+    }
+    
+    .projects-grid {
         grid-template-columns: 1fr;
     }
     
-    .introduction,
-    .blog-links {
-        padding: 50px 0;
+    .platform-links {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
+    .hero-with-background h1 {
+        font-size: 2rem;
     }
     
-    .hero {
-        padding: 50px 0;
+    .about-me-content {
+        padding: 20px 15px;
     }
     
-    .hero h1 {
-        font-size: 1.8rem;
+    .blog-content {
+        padding: 15px 20px;
     }
     
-    .blog-card,
-    .platform-link {
+    .project-card {
         padding: 20px;
     }
 }
